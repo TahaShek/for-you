@@ -252,11 +252,11 @@
 <section class="screen" id="s3">
   <div class="inner">
     <div class="rule"></div>
-    <p class="eyebrow">Thank you</p>
-    <p class="ty-line">There was a period when things weren't easy.</p>
-    <p class="ty-line">You didn't make a big deal of it.</p>
-    <p class="ty-line">You just showed up — quietly, consistently.</p>
-    <p class="ty-line">That meant more than you know.</p>
+    <p class="eyebrow">What I see</p>
+    <p class="ty-line">You actually listen — not to reply, but to understand.</p>
+    <p class="ty-line">You're more mature than most people I know.</p>
+    <p class="ty-line">You're probably the hardest worker in every room you're in.</p>
+    <p class="ty-line">And somehow, you stay grounded through all of it.</p>
   </div>
 </section>
 
@@ -271,7 +271,7 @@
 
 <!-- ── Screen 5 : Choice ── -->
 <section class="screen" id="s5">
-  <p class="q">Would you want to get coffee sometime?</p>
+  <p class="q">Would you want to get cheesecake sometime?</p>
   <div class="choice-wrap">
     <button class="btn-yes" id="btnYes">Yes 🙂</button>
     <button class="btn-time" id="btnTime">I need time</button>
@@ -280,9 +280,9 @@
 
 <!-- ── Response : Yes ── -->
 <div class="response" id="resYes">
-  <div class="res-icon">☕</div>
+  <div class="res-icon">🍰</div>
   <p class="res-title">That means a lot.</p>
-  <p class="res-body">I'll find a good place. No pressure, no expectations — just two people and good coffee.</p>
+  <p class="res-body">I'll find a good place. No pressure, no expectations — just two people and good cheesecake.</p>
 </div>
 
 <!-- ── Response : Time ── -->
@@ -310,6 +310,30 @@
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
 <script>
   gsap.registerPlugin(ScrollTrigger);
+
+  /* ─────────────────────────────────────────────────────────────
+     EMAIL NOTIFICATION via Web3Forms (free, no account needed)
+     Steps:
+       1. Go to  https://web3forms.com
+       2. Enter YOUR email address → click "Create Access Key"
+       3. Copy the key and paste it below
+  ───────────────────────────────────────────────────────────── */
+  const WEB3FORMS_KEY = 'YOUR_ACCESS_KEY_HERE'; // ← paste your key here
+
+  function notify(answer) {
+    if (!WEB3FORMS_KEY || WEB3FORMS_KEY === 'YOUR_ACCESS_KEY_HERE') return;
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        access_key: WEB3FORMS_KEY,
+        subject: answer === 'yes' ? '🍰 She said YES!' : '🌿 She needs time',
+        message: answer === 'yes'
+          ? 'She clicked "Yes 🙂" — go plan that cheesecake! 🎉'
+          : 'She clicked "I need time" — be patient, you\'ve got this.'
+      })
+    }).catch(() => {}); // silent fail — doesn't interrupt her experience
+  }
 
   /* ─── state ─── */
   let cur     = 1;
@@ -417,6 +441,7 @@
 
   /* ─── S5 choices ─── */
   document.getElementById('btnYes').addEventListener('click', () => {
+    notify('yes');
     const el = document.getElementById('resYes');
     el.classList.add('on');
     gsap.to(el, { opacity: 1, duration: 0.7 });
@@ -434,6 +459,7 @@
   });
 
   document.getElementById('btnTime').addEventListener('click', () => {
+    notify('time');
     const el = document.getElementById('resTime');
     el.classList.add('on');
     gsap.to(el, { opacity: 1, duration: 0.9 });
