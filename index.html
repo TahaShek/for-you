@@ -28,7 +28,6 @@
       -moz-osx-font-smoothing:grayscale;
     }
 
-    /* subtle noise overlay for warmth */
     body::before {
       content:'';
       position:fixed; inset:0;
@@ -106,7 +105,7 @@
       opacity:0;
     }
 
-    /* ─── S3 · THANK YOU ─── */
+    /* ─── S3 · WHAT I SEE ─── */
     #s3 .inner { max-width:480px; text-align:center; }
     .rule {
       width:34px; height:1px;
@@ -128,8 +127,39 @@
       opacity:0;
     }
 
-    /* ─── S4 · HONEST ─── */
-    #s4 .honest-wrap {
+    /* ─── S4 · PERSONAL ─── */
+    #s4 .personal-wrap {
+      max-width:460px;
+      text-align:center;
+      display:flex; flex-direction:column; gap:14px;
+    }
+    .p-line {
+      font-weight:300;
+      opacity:0;
+      line-height:1.75;
+    }
+    .p-line:nth-child(1) {
+      font-size: clamp(0.9rem, 2.8vw, 1.08rem);
+      color:var(--muted);
+    }
+    .p-line:nth-child(2) {
+      font-size: clamp(0.9rem, 2.8vw, 1.08rem);
+      color:var(--muted);
+    }
+    .p-line:nth-child(3) {
+      font-size: clamp(0.88rem, 2.6vw, 1rem);
+      color:var(--muted);
+      font-style:italic;
+      letter-spacing:0.01em;
+    }
+    .p-line:nth-child(4) {
+      font-size: clamp(1rem, 3.2vw, 1.2rem);
+      color:var(--text);
+      margin-top:6px;
+    }
+
+    /* ─── S5 · HONEST ─── */
+    #s5 .honest-wrap {
       text-align:center;
       display:flex; flex-direction:column; gap:16px;
     }
@@ -145,8 +175,8 @@
       letter-spacing:0.01em;
     }
 
-    /* ─── S5 · CHOICE ─── */
-    #s5 .q {
+    /* ─── S6 · CHOICE ─── */
+    #s6 .q {
       font-size: clamp(0.95rem, 3vw, 1.2rem);
       font-weight:300;
       color:var(--muted);
@@ -248,7 +278,7 @@
   </div>
 </section>
 
-<!-- ── Screen 3 : Thank You ── -->
+<!-- ── Screen 3 : What I see ── -->
 <section class="screen" id="s3">
   <div class="inner">
     <div class="rule"></div>
@@ -260,8 +290,18 @@
   </div>
 </section>
 
-<!-- ── Screen 4 : Honest ── -->
+<!-- ── Screen 4 : Personal ── -->
 <section class="screen" id="s4">
+  <div class="personal-wrap">
+    <p class="p-line">I'm not someone who usually does something like this for people.</p>
+    <p class="p-line">But with you, it never felt like effort.</p>
+    <p class="p-line">Talking to you. Listening to you. Sharing my day with you.</p>
+    <p class="p-line">I don't know why — it just feels right.</p>
+  </div>
+</section>
+
+<!-- ── Screen 5 : Honest ── -->
+<section class="screen" id="s5">
   <div class="honest-wrap">
     <p class="h-line">I like you.</p>
     <p class="h-line">I don't know if you feel the same.</p>
@@ -269,8 +309,8 @@
   </div>
 </section>
 
-<!-- ── Screen 5 : Choice ── -->
-<section class="screen" id="s5">
+<!-- ── Screen 6 : Choice ── -->
+<section class="screen" id="s6">
   <p class="q">Would you want to get cheesecake sometime?</p>
   <div class="choice-wrap">
     <button class="btn-yes" id="btnYes">Yes 🙂</button>
@@ -295,9 +335,10 @@
 <!-- Tap hint -->
 <p id="tapHint">Tap anywhere to continue</p>
 
-<!-- Nav dots -->
+<!-- Nav dots (6) -->
 <div class="dots">
   <div class="dot on"></div>
+  <div class="dot"></div>
   <div class="dot"></div>
   <div class="dot"></div>
   <div class="dot"></div>
@@ -332,19 +373,18 @@
           ? 'She clicked "Yes 🙂" — go plan that cheesecake! 🎉'
           : 'She clicked "I need time" — be patient, you\'ve got this.'
       })
-    }).catch(() => {}); // silent fail — doesn't interrupt her experience
+    }).catch(() => {});
   }
 
   /* ─── state ─── */
-  let cur     = 1;
-  let canTap  = false;
-  const dots  = document.querySelectorAll('.dot');
+  let cur    = 1;
+  let canTap = false;
+  const dots = document.querySelectorAll('.dot');
 
   /* ─── helpers ─── */
   function setDot(n) {
     dots.forEach((d, i) => d.classList.toggle('on', i + 1 === n));
   }
-
   function showHint() {
     gsap.to('#tapHint', { opacity: 1, duration: 0.7, ease: 'power2.out' });
   }
@@ -354,7 +394,7 @@
 
   /* ─── screen transition ─── */
   function goTo(n) {
-    if (n < 1 || n > 5 || n === cur) return;
+    if (n < 1 || n > 6 || n === cur) return;
     canTap = false;
     hideHint();
 
@@ -362,7 +402,6 @@
     const to   = document.getElementById('s' + n);
 
     gsap.set(from, { pointerEvents: 'none' });
-
     gsap.to(from, {
       opacity: 0, y: -16, duration: 0.42, ease: 'power2.in',
       onComplete() {
@@ -415,7 +454,17 @@
     }
 
     if (n === 4) {
-      gsap.fromTo('#s4 .h-line',
+      gsap.fromTo('#s4 .p-line',
+        { opacity: 0, y: 10 },
+        {
+          opacity: 1, y: 0, stagger: 0.7, delay: 0.3,
+          duration: 0.8, ease: 'power2.out',
+          onComplete() { showHint(); canTap = true; }
+        });
+    }
+
+    if (n === 5) {
+      gsap.fromTo('#s5 .h-line',
         { opacity: 0, y: 12 },
         {
           opacity: 1, y: 0, stagger: 0.78, delay: 0.3,
@@ -424,22 +473,22 @@
         });
     }
 
-    if (n === 5) {
-      gsap.to('#s5 .q',          { opacity: 1, duration: 0.75, delay: 0.2 });
-      gsap.to('#s5 .choice-wrap',{ opacity: 1, duration: 0.75, delay: 0.75 });
+    if (n === 6) {
+      gsap.to('#s6 .q',          { opacity: 1, duration: 0.75, delay: 0.2 });
+      gsap.to('#s6 .choice-wrap',{ opacity: 1, duration: 0.75, delay: 0.75 });
     }
   }
 
-  /* ─── tap-anywhere (screens 2 – 4) ─── */
+  /* ─── tap-anywhere (screens 2 – 5) ─── */
   document.addEventListener('click', (e) => {
     if (e.target.closest('button')) return;
-    if (canTap && cur >= 2 && cur <= 4) goTo(cur + 1);
+    if (canTap && cur >= 2 && cur <= 5) goTo(cur + 1);
   });
 
   /* ─── S1 button ─── */
   document.getElementById('btn1').addEventListener('click', () => goTo(2));
 
-  /* ─── S5 choices ─── */
+  /* ─── S6 choices ─── */
   document.getElementById('btnYes').addEventListener('click', () => {
     notify('yes');
     const el = document.getElementById('resYes');
@@ -448,7 +497,6 @@
     gsap.to('.dots', { opacity: 0, duration: 0.4 });
     gsap.to('#tapHint', { opacity: 0, duration: 0.3 });
 
-    /* warm gold confetti */
     const colors = ['#b8973a', '#d4af6a', '#f0e0a0', '#c8a84b', '#fff8e7'];
     const end = Date.now() + 2800;
     (function frame() {
