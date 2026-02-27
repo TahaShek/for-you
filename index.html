@@ -32,8 +32,7 @@
       content:'';
       position:fixed; inset:0;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-      pointer-events:none;
-      z-index:0;
+      pointer-events:none; z-index:0;
     }
 
     /* ─────────── SCREENS ─────────── */
@@ -42,194 +41,174 @@
       display:flex; flex-direction:column;
       align-items:center; justify-content:center;
       padding:48px 32px;
-      opacity:0;
-      pointer-events:none;
-      z-index:1;
+      opacity:0; pointer-events:none; z-index:1;
     }
 
     /* ─── S1 · OPENING ─── */
     #s1 .big {
       font-size: clamp(3rem, 11vw, 5.5rem);
-      font-weight:300;
-      letter-spacing:0.04em;
-      line-height:1;
+      font-weight:300; letter-spacing:0.04em; line-height:1;
     }
     #s1 .sub {
       font-size: clamp(0.9rem, 2.8vw, 1.1rem);
-      font-weight:300;
-      color:var(--muted);
-      margin-top:14px;
-      letter-spacing:0.01em;
+      font-weight:300; color:var(--muted); margin-top:14px;
     }
 
     .ghost-btn {
-      margin-top:56px;
-      background:none;
-      border:1px solid var(--gold);
-      color:var(--gold);
-      font-family:'Inter', sans-serif;
-      font-size:0.74rem;
-      letter-spacing:0.14em;
-      text-transform:uppercase;
-      padding:13px 38px;
-      cursor:pointer;
+      margin-top:56px; background:none;
+      border:1px solid var(--gold); color:var(--gold);
+      font-family:'Inter', sans-serif; font-size:0.74rem;
+      letter-spacing:0.14em; text-transform:uppercase;
+      padding:13px 38px; cursor:pointer;
       transition:background 0.3s, color 0.3s;
     }
     .ghost-btn:hover { background:var(--gold); color:var(--bg); }
 
     /* ─── S2 · PHOTO ─── */
-    #s2 .frame {
-      width: min(250px, 62vw);
-      height: min(250px, 62vw);
-      border-radius:50%;
-      overflow:hidden;
+    .photo-row {
+      display:flex; gap:18px; align-items:center;
+      justify-content:center; flex-wrap:wrap;
+    }
+    .frame {
+      border-radius:50%; overflow:hidden;
       border:1px solid var(--gold-dim);
       box-shadow:0 8px 52px rgba(0,0,0,0.08);
       flex-shrink:0;
     }
-    #s2 .frame img {
+    .frame.large {
+      width: min(190px, 46vw);
+      height: min(190px, 46vw);
+    }
+    .frame.small {
+      width: min(140px, 34vw);
+      height: min(140px, 34vw);
+      opacity:0.85;
+    }
+    .frame img {
       width:100%; height:100%;
-      object-fit:cover;
-      object-position:center top;
+      object-fit:cover; object-position:center top;
     }
     .captions {
-      margin-top:30px;
-      display:flex; flex-direction:column; gap:8px;
-      text-align:center;
+      margin-top:28px;
+      display:flex; flex-direction:column; gap:8px; text-align:center;
     }
     .cap {
       font-size: clamp(0.82rem, 2.4vw, 0.98rem);
-      font-weight:300;
-      color:var(--muted);
-      letter-spacing:0.01em;
-      opacity:0;
+      font-weight:300; color:var(--muted); opacity:0;
     }
 
     /* ─── S3 · WHAT I SEE ─── */
     #s3 .inner { max-width:480px; text-align:center; }
     .rule {
       width:34px; height:1px;
-      background:var(--gold); opacity:0.4;
-      margin:0 auto 26px;
+      background:var(--gold); opacity:0.4; margin:0 auto 26px;
     }
     #s3 .eyebrow {
-      font-size:0.7rem;
-      letter-spacing:0.18em;
-      text-transform:uppercase;
-      color:var(--gold);
-      margin-bottom:26px;
-      opacity:0;
+      font-size:0.7rem; letter-spacing:0.18em;
+      text-transform:uppercase; color:var(--gold);
+      margin-bottom:26px; opacity:0;
     }
     .ty-line {
       font-size: clamp(0.88rem, 2.6vw, 1.04rem);
-      font-weight:300;
-      line-height:1.95;
-      opacity:0;
+      font-weight:300; line-height:1.95; opacity:0;
     }
 
     /* ─── S4 · PERSONAL ─── */
     #s4 .personal-wrap {
-      max-width:460px;
-      text-align:center;
+      max-width:460px; text-align:center;
       display:flex; flex-direction:column; gap:14px;
     }
-    .p-line {
-      font-weight:300;
-      opacity:0;
-      line-height:1.75;
-    }
-    .p-line:nth-child(1) {
-      font-size: clamp(0.9rem, 2.8vw, 1.08rem);
-      color:var(--muted);
-    }
-    .p-line:nth-child(2) {
-      font-size: clamp(0.9rem, 2.8vw, 1.08rem);
-      color:var(--muted);
-    }
-    .p-line:nth-child(3) {
-      font-size: clamp(0.88rem, 2.6vw, 1rem);
-      color:var(--muted);
-      font-style:italic;
-      letter-spacing:0.01em;
-    }
-    .p-line:nth-child(4) {
-      font-size: clamp(1rem, 3.2vw, 1.2rem);
-      color:var(--text);
-      margin-top:6px;
-    }
+    .p-line { font-weight:300; opacity:0; line-height:1.75; }
+    .p-line:nth-child(1) { font-size:clamp(0.9rem,2.8vw,1.08rem); color:var(--muted); }
+    .p-line:nth-child(2) { font-size:clamp(0.9rem,2.8vw,1.08rem); color:var(--muted); }
+    .p-line:nth-child(3) { font-size:clamp(0.88rem,2.6vw,1rem); color:var(--muted); font-style:italic; }
+    .p-line:nth-child(4) { font-size:clamp(1rem,3.2vw,1.2rem); color:var(--text); margin-top:6px; }
 
     /* ─── S5 · HONEST ─── */
     #s5 .honest-wrap {
-      text-align:center;
-      display:flex; flex-direction:column; gap:16px;
+      text-align:center; display:flex; flex-direction:column; gap:16px;
     }
     .h-line { font-weight:300; opacity:0; }
-    .h-line:nth-child(1) {
-      font-size: clamp(1.7rem, 5.5vw, 2.5rem);
-      letter-spacing:0.02em;
-    }
+    .h-line:nth-child(1) { font-size:clamp(1.7rem,5.5vw,2.5rem); letter-spacing:0.02em; }
     .h-line:nth-child(2),
-    .h-line:nth-child(3) {
-      font-size: clamp(0.9rem, 2.8vw, 1.15rem);
-      color:var(--muted);
-      letter-spacing:0.01em;
-    }
+    .h-line:nth-child(3) { font-size:clamp(0.9rem,2.8vw,1.15rem); color:var(--muted); }
 
     /* ─── S6 · CHOICE ─── */
     #s6 .q {
-      font-size: clamp(0.95rem, 3vw, 1.2rem);
-      font-weight:300;
-      color:var(--muted);
-      text-align:center;
-      margin-bottom:44px;
-      max-width:340px;
-      line-height:1.7;
-      opacity:0;
+      font-size:clamp(0.95rem,3vw,1.2rem); font-weight:300;
+      color:var(--muted); text-align:center; margin-bottom:44px;
+      max-width:340px; line-height:1.7; opacity:0;
     }
     .choice-wrap {
       display:flex; flex-direction:column; gap:13px;
-      width: min(290px, 76vw);
-      opacity:0;
+      width:min(290px,76vw); opacity:0;
     }
     .btn-yes {
       background:var(--gold); border:none; color:#fff;
-      font-family:'Inter', sans-serif;
-      font-size:0.92rem; font-weight:400;
+      font-family:'Inter',sans-serif; font-size:0.92rem; font-weight:400;
       padding:16px 28px; cursor:pointer;
-      transition:background 0.25s;
-      letter-spacing:0.03em;
+      transition:background 0.25s; letter-spacing:0.03em;
     }
     .btn-yes:hover { background:#9e8030; }
     .btn-time {
       background:none; border:1px solid #ccc; color:var(--muted);
-      font-family:'Inter', sans-serif;
-      font-size:0.86rem; font-weight:300;
+      font-family:'Inter',sans-serif; font-size:0.86rem; font-weight:300;
       padding:14px 28px; cursor:pointer;
-      transition:border-color 0.25s, color 0.25s;
-      letter-spacing:0.02em;
+      transition:border-color 0.25s, color 0.25s; letter-spacing:0.02em;
     }
     .btn-time:hover { border-color:var(--muted); color:var(--text); }
 
-    /* ─── RESPONSES ─── */
-    .response {
+    /* ─── RESPONSE : YES — full page cheesecake rain ─── */
+    #resYes {
+      position:fixed; inset:0;
+      display:flex; align-items:center; justify-content:center;
+      background:var(--bg);
+      opacity:0; pointer-events:none; z-index:99;
+      overflow:hidden;
+    }
+    #resYes.on { pointer-events:all; }
+    #resYes .center-msg {
+      position:relative; z-index:2;
+      text-align:center;
+    }
+    #resYes .center-msg .big-cake { font-size:3.5rem; display:block; margin-bottom:14px; }
+    #resYes .center-msg p {
+      font-size:clamp(1.1rem,4vw,1.5rem); font-weight:300;
+      color:var(--text); letter-spacing:0.02em;
+    }
+
+    @keyframes cakeFall {
+      0%   { transform: translateY(-80px) rotate(0deg);  opacity:1; }
+      100% { transform: translateY(110vh) rotate(25deg); opacity:0.7; }
+    }
+    .cake-piece {
+      position:absolute; top:0;
+      animation: cakeFall linear infinite;
+      pointer-events:none; user-select:none; z-index:1;
+    }
+
+    /* ─── RESPONSE : NO ─── */
+    #resTime {
       position:fixed; inset:0;
       display:flex; flex-direction:column;
       align-items:center; justify-content:center;
-      padding:48px 32px; text-align:center;
+      padding:48px 36px; text-align:center;
       background:var(--bg);
-      opacity:0; pointer-events:none;
-      z-index:99;
+      opacity:0; pointer-events:none; z-index:99;
     }
-    .response.on { pointer-events:all; }
-    .res-icon  { font-size:2rem; margin-bottom:20px; }
-    .res-title {
-      font-size: clamp(1.2rem, 4vw, 1.65rem);
-      font-weight:300; margin-bottom:14px;
+    #resTime.on { pointer-events:all; }
+    .no-line {
+      font-weight:300; opacity:0; line-height:1.85;
     }
-    .res-body  {
-      font-size: clamp(0.84rem, 2.5vw, 0.97rem);
-      font-weight:300; color:var(--muted);
-      line-height:1.9; max-width:370px;
+    .no-line:nth-child(1) {
+      font-size:clamp(0.92rem,2.8vw,1.06rem);
+      color:var(--text); margin-bottom:4px;
+    }
+    .no-line:nth-child(2),
+    .no-line:nth-child(3),
+    .no-line:nth-child(4) {
+      font-size:clamp(0.86rem,2.5vw,0.98rem);
+      color:var(--muted); max-width:420px;
     }
 
     /* ─── TAP HINT ─── */
@@ -238,8 +217,7 @@
       transform:translateX(-50%);
       font-size:0.68rem; letter-spacing:0.13em;
       text-transform:uppercase; color:var(--gold);
-      opacity:0; pointer-events:none; z-index:50;
-      white-space:nowrap;
+      opacity:0; pointer-events:none; z-index:50; white-space:nowrap;
     }
 
     /* ─── NAV DOTS ─── */
@@ -250,8 +228,7 @@
     }
     .dot {
       width:5px; height:5px; border-radius:50%;
-      background:var(--gold); opacity:0.22;
-      transition:opacity 0.35s;
+      background:var(--gold); opacity:0.22; transition:opacity 0.35s;
     }
     .dot.on { opacity:1; }
   </style>
@@ -265,10 +242,15 @@
   <button class="ghost-btn" id="btn1">Continue</button>
 </section>
 
-<!-- ── Screen 2 : Photo ── -->
+<!-- ── Screen 2 : Photos ── -->
 <section class="screen" id="s2">
-  <div class="frame">
-    <img src="WhatsApp Image 2026-02-23 at 12.46.30 AM.jpeg" alt="">
+  <div class="photo-row">
+    <div class="frame large">
+      <img src="WhatsApp Image 2026-02-23 at 12.46.30 AM (1).jpeg" alt="">
+    </div>
+    <div class="frame small">
+      <img src="WhatsApp Image 2026-02-23 at 12.46.30 AM (2) copy.jpeg" alt="">
+    </div>
   </div>
   <div class="captions">
     <p class="cap">Someone practical.</p>
@@ -314,28 +296,30 @@
   <p class="q">Would you want to get cheesecake sometime?</p>
   <div class="choice-wrap">
     <button class="btn-yes" id="btnYes">Yes 🙂</button>
-    <button class="btn-time" id="btnTime">I need time</button>
+    <button class="btn-time" id="btnTime">I don't feel the same</button>
   </div>
 </section>
 
-<!-- ── Response : Yes ── -->
-<div class="response" id="resYes">
-  <div class="res-icon">🍰</div>
-  <p class="res-title">That means a lot.</p>
-  <p class="res-body">I'll find a good place. No pressure, no expectations — just two people and good cheesecake.</p>
+<!-- ── Response : Yes — cheesecake rain ── -->
+<div id="resYes">
+  <div class="center-msg">
+    <span class="big-cake">🍰</span>
+    <p>See you soon.</p>
+  </div>
 </div>
 
-<!-- ── Response : Time ── -->
-<div class="response" id="resTime">
-  <div class="res-icon">🌿</div>
-  <p class="res-title">That's completely okay.</p>
-  <p class="res-body">Take all the time you need. Nothing changes between us. I just wanted to be honest with you.</p>
+<!-- ── Response : No ── -->
+<div id="resTime">
+  <p class="no-line">I respect you — genuinely, more than you know.</p>
+  <p class="no-line">But if you don't feel the same, I don't think I can stay just friends.</p>
+  <p class="no-line">It's not something I can force. I see you as something more, and pretending otherwise wouldn't be honest.</p>
+  <p class="no-line">I've never dated anyone because I never wanted to waste someone's time. I hope you understand that this came from a real place.</p>
 </div>
 
 <!-- Tap hint -->
 <p id="tapHint">Tap anywhere to continue</p>
 
-<!-- Nav dots (6) -->
+<!-- Nav dots -->
 <div class="dots">
   <div class="dot on"></div>
   <div class="dot"></div>
@@ -348,179 +332,147 @@
 <!-- ────────────────────────── SCRIPTS ────────────────────────── -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
 <script>
   gsap.registerPlugin(ScrollTrigger);
 
-  /* ─────────────────────────────────────────────────────────────
-     EMAIL NOTIFICATION via Web3Forms (free, no account needed)
-     Steps:
-       1. Go to  https://web3forms.com
-       2. Enter YOUR email address → click "Create Access Key"
-       3. Copy the key and paste it below
-  ───────────────────────────────────────────────────────────── */
+  /* ── Web3Forms notification ── */
   const WEB3FORMS_KEY = '91228330-0f9a-4147-ac78-6e5661fec6f0';
 
   function notify(answer) {
-    if (!WEB3FORMS_KEY || WEB3FORMS_KEY === 'YOUR_ACCESS_KEY_HERE') return;
     fetch('https://api.web3forms.com/submit', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         access_key: WEB3FORMS_KEY,
-        subject: answer === 'yes' ? '🍰 She said YES!' : '🌿 She needs time',
+        subject: answer === 'yes' ? '🍰 She said YES!' : '💔 She doesn\'t feel the same',
         message: answer === 'yes'
           ? 'She clicked "Yes 🙂" — go plan that cheesecake! 🎉'
-          : 'She clicked "I need time" — be patient, you\'ve got this.'
+          : 'She clicked "I don\'t feel the same". Be strong.'
       })
     }).catch(() => {});
   }
 
-  /* ─── state ─── */
+  /* ── state ── */
   let cur    = 1;
   let canTap = false;
   const dots = document.querySelectorAll('.dot');
 
-  /* ─── helpers ─── */
-  function setDot(n) {
-    dots.forEach((d, i) => d.classList.toggle('on', i + 1 === n));
-  }
-  function showHint() {
-    gsap.to('#tapHint', { opacity: 1, duration: 0.7, ease: 'power2.out' });
-  }
-  function hideHint() {
-    gsap.to('#tapHint', { opacity: 0, duration: 0.3 });
-  }
+  function setDot(n) { dots.forEach((d, i) => d.classList.toggle('on', i + 1 === n)); }
+  function showHint() { gsap.to('#tapHint', { opacity:1, duration:0.7, ease:'power2.out' }); }
+  function hideHint() { gsap.to('#tapHint', { opacity:0, duration:0.3 }); }
 
-  /* ─── screen transition ─── */
+  /* ── transition ── */
   function goTo(n) {
     if (n < 1 || n > 6 || n === cur) return;
-    canTap = false;
-    hideHint();
-
+    canTap = false; hideHint();
     const from = document.getElementById('s' + cur);
     const to   = document.getElementById('s' + n);
-
-    gsap.set(from, { pointerEvents: 'none' });
+    gsap.set(from, { pointerEvents:'none' });
     gsap.to(from, {
-      opacity: 0, y: -16, duration: 0.42, ease: 'power2.in',
+      opacity:0, y:-16, duration:0.42, ease:'power2.in',
       onComplete() {
-        gsap.set(to, { opacity: 0, y: 22, pointerEvents: 'all' });
+        gsap.set(to, { opacity:0, y:22, pointerEvents:'all' });
         gsap.to(to, {
-          opacity: 1, y: 0, duration: 0.52, ease: 'power2.out',
+          opacity:1, y:0, duration:0.52, ease:'power2.out',
           onComplete() { cur = n; setDot(n); animateIn(n); }
         });
       }
     });
   }
 
-  /* ─── per-screen entrance animations ─── */
+  /* ── per-screen animations ── */
   function animateIn(n) {
-
     if (n === 1) {
-      gsap.fromTo('#s1 .big',
-        { opacity: 0, y: 22 },
-        { opacity: 1, y: 0, duration: 0.85, ease: 'power2.out' });
-      gsap.fromTo('#s1 .sub',
-        { opacity: 0, y: 14 },
-        { opacity: 1, y: 0, duration: 0.8, delay: 0.28, ease: 'power2.out' });
-      gsap.fromTo('#s1 .ghost-btn',
-        { opacity: 0 },
-        { opacity: 1, duration: 0.7, delay: 0.65 });
+      gsap.fromTo('#s1 .big',      { opacity:0, y:22 }, { opacity:1, y:0, duration:0.85, ease:'power2.out' });
+      gsap.fromTo('#s1 .sub',      { opacity:0, y:14 }, { opacity:1, y:0, duration:0.8, delay:0.28, ease:'power2.out' });
+      gsap.fromTo('#s1 .ghost-btn',{ opacity:0 },       { opacity:1, duration:0.7, delay:0.65 });
     }
-
     if (n === 2) {
-      gsap.fromTo('#s2 .frame',
-        { opacity: 0, scale: 0.88 },
-        { opacity: 1, scale: 1, duration: 1.3, ease: 'power2.out' });
+      gsap.fromTo('#s2 .frame.large', { opacity:0, scale:0.88 }, { opacity:1, scale:1, duration:1.2, ease:'power2.out' });
+      gsap.fromTo('#s2 .frame.small', { opacity:0, scale:0.88 }, { opacity:0.85, scale:1, duration:1.2, delay:0.2, ease:'power2.out' });
       gsap.fromTo('#s2 .cap',
-        { opacity: 0, y: 10 },
-        {
-          opacity: 1, y: 0, stagger: 0.55, delay: 1.0,
-          duration: 0.65, ease: 'power2.out',
-          onComplete() { showHint(); canTap = true; }
-        });
+        { opacity:0, y:10 },
+        { opacity:1, y:0, stagger:0.55, delay:1.0, duration:0.65, ease:'power2.out',
+          onComplete() { showHint(); canTap = true; } });
     }
-
     if (n === 3) {
-      gsap.to('#s3 .eyebrow', { opacity: 1, duration: 0.6, delay: 0.2 });
+      gsap.to('#s3 .eyebrow', { opacity:1, duration:0.6, delay:0.2 });
       gsap.fromTo('#s3 .ty-line',
-        { opacity: 0, y: 8 },
-        {
-          opacity: 1, y: 0, stagger: 0.65, delay: 0.55,
-          duration: 0.75, ease: 'power2.out',
-          onComplete() { showHint(); canTap = true; }
-        });
+        { opacity:0, y:8 },
+        { opacity:1, y:0, stagger:0.65, delay:0.55, duration:0.75, ease:'power2.out',
+          onComplete() { showHint(); canTap = true; } });
     }
-
     if (n === 4) {
       gsap.fromTo('#s4 .p-line',
-        { opacity: 0, y: 10 },
-        {
-          opacity: 1, y: 0, stagger: 0.7, delay: 0.3,
-          duration: 0.8, ease: 'power2.out',
-          onComplete() { showHint(); canTap = true; }
-        });
+        { opacity:0, y:10 },
+        { opacity:1, y:0, stagger:0.7, delay:0.3, duration:0.8, ease:'power2.out',
+          onComplete() { showHint(); canTap = true; } });
     }
-
     if (n === 5) {
       gsap.fromTo('#s5 .h-line',
-        { opacity: 0, y: 12 },
-        {
-          opacity: 1, y: 0, stagger: 0.78, delay: 0.3,
-          duration: 0.85, ease: 'power2.out',
-          onComplete() { showHint(); canTap = true; }
-        });
+        { opacity:0, y:12 },
+        { opacity:1, y:0, stagger:0.78, delay:0.3, duration:0.85, ease:'power2.out',
+          onComplete() { showHint(); canTap = true; } });
     }
-
     if (n === 6) {
-      gsap.to('#s6 .q',          { opacity: 1, duration: 0.75, delay: 0.2 });
-      gsap.to('#s6 .choice-wrap',{ opacity: 1, duration: 0.75, delay: 0.75 });
+      gsap.to('#s6 .q',          { opacity:1, duration:0.75, delay:0.2 });
+      gsap.to('#s6 .choice-wrap',{ opacity:1, duration:0.75, delay:0.75 });
     }
   }
 
-  /* ─── tap-anywhere (screens 2 – 5) ─── */
+  /* ── tap anywhere (screens 2–5) ── */
   document.addEventListener('click', (e) => {
     if (e.target.closest('button')) return;
     if (canTap && cur >= 2 && cur <= 5) goTo(cur + 1);
   });
 
-  /* ─── S1 button ─── */
   document.getElementById('btn1').addEventListener('click', () => goTo(2));
 
-  /* ─── S6 choices ─── */
+  /* ── YES — cheesecake rain ── */
   document.getElementById('btnYes').addEventListener('click', () => {
     notify('yes');
     const el = document.getElementById('resYes');
     el.classList.add('on');
-    gsap.to(el, { opacity: 1, duration: 0.7 });
-    gsap.to('.dots', { opacity: 0, duration: 0.4 });
-    gsap.to('#tapHint', { opacity: 0, duration: 0.3 });
+    gsap.to(el, { opacity:1, duration:0.6 });
+    gsap.to('.dots', { opacity:0, duration:0.3 });
+    gsap.to('#tapHint', { opacity:0, duration:0.3 });
 
-    const colors = ['#b8973a', '#d4af6a', '#f0e0a0', '#c8a84b', '#fff8e7'];
-    const end = Date.now() + 2800;
-    (function frame() {
-      confetti({ particleCount: 2, angle: 60,  spread: 62, origin: { x: 0 }, colors, gravity: 1.1, scalar: 0.9 });
-      confetti({ particleCount: 2, angle: 120, spread: 62, origin: { x: 1 }, colors, gravity: 1.1, scalar: 0.9 });
-      if (Date.now() < end) requestAnimationFrame(frame);
-    })();
+    // Animate center message
+    gsap.fromTo('#resYes .big-cake', { opacity:0, scale:0.5 }, { opacity:1, scale:1, duration:0.7, ease:'back.out(1.5)', delay:0.3 });
+    gsap.fromTo('#resYes .center-msg p', { opacity:0, y:10 }, { opacity:1, y:0, duration:0.7, delay:0.7 });
+
+    // Spawn falling cheesecakes
+    const emojis = ['🍰','🍰','🍰','🎂','🍰','🍰'];
+    for (let i = 0; i < 30; i++) {
+      const c = document.createElement('span');
+      c.className = 'cake-piece';
+      c.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      c.style.left     = (Math.random() * 102) + '%';
+      c.style.fontSize = (1.2 + Math.random() * 2.2) + 'rem';
+      const dur = 2.5 + Math.random() * 3;
+      const del = Math.random() * 4;
+      c.style.animation = `cakeFall ${dur}s ${del}s linear infinite`;
+      el.appendChild(c);
+    }
   });
 
+  /* ── NO response ── */
   document.getElementById('btnTime').addEventListener('click', () => {
-    notify('time');
+    notify('no');
     const el = document.getElementById('resTime');
     el.classList.add('on');
-    gsap.to(el, { opacity: 1, duration: 0.9 });
-    gsap.to('.dots', { opacity: 0, duration: 0.4 });
-    gsap.to('#tapHint', { opacity: 0, duration: 0.3 });
+    gsap.to(el, { opacity:1, duration:0.6 });
+    gsap.to('.dots', { opacity:0, duration:0.3 });
+    gsap.to('#tapHint', { opacity:0, duration:0.3 });
+
+    gsap.fromTo('#resTime .no-line',
+      { opacity:0, y:8 },
+      { opacity:1, y:0, stagger:0.65, delay:0.3, duration:0.75, ease:'power2.out' });
   });
 
-  /* ─── boot ─── */
-  gsap.set('#s1', { opacity: 0, y: 18, pointerEvents: 'all' });
-  gsap.to('#s1', {
-    opacity: 1, y: 0, duration: 0.65, ease: 'power2.out',
-    onComplete: () => animateIn(1)
-  });
+  /* ── boot ── */
+  gsap.set('#s1', { opacity:0, y:18, pointerEvents:'all' });
+  gsap.to('#s1', { opacity:1, y:0, duration:0.65, ease:'power2.out', onComplete: () => animateIn(1) });
   setDot(1);
 </script>
 </body>
