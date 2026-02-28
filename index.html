@@ -64,32 +64,29 @@
     }
     .ghost-btn:hover { background:var(--gold); color:var(--bg); }
 
-    /* ─── S2 · PHOTO ─── */
-    .photo-row {
-      display:flex; gap:18px; align-items:center;
-      justify-content:center; flex-wrap:wrap;
+    /* ─── S2 · POLAROID GRID ─── */
+    .polaroid-grid {
+      display:flex; gap:16px;
+      align-items:center; justify-content:center;
     }
-    .frame {
-      border-radius:50%; overflow:hidden;
-      border:1px solid var(--gold-dim);
-      box-shadow:0 8px 52px rgba(0,0,0,0.08);
+    .polaroid {
+      background:#fff;
+      padding:8px 8px 24px;
+      box-shadow:0 6px 28px rgba(0,0,0,0.13);
       flex-shrink:0;
+      opacity:0;
     }
-    .frame.large {
-      width: min(190px, 46vw);
-      height: min(190px, 46vw);
-    }
-    .frame.small {
-      width: min(140px, 34vw);
-      height: min(140px, 34vw);
-      opacity:0.85;
-    }
-    .frame img {
-      width:100%; height:100%;
-      object-fit:cover; object-position:center top;
+    .polaroid:first-child { transform:rotate(-3deg); }
+    .polaroid:last-child  { transform:rotate(2.2deg); }
+    .polaroid img {
+      display:block;
+      width: min(148px, 36vw);
+      height: min(168px, 42vw);
+      object-fit:cover;
+      object-position:center top;
     }
     .captions {
-      margin-top:28px;
+      margin-top:32px;
       display:flex; flex-direction:column; gap:8px; text-align:center;
     }
     .cap {
@@ -132,6 +129,7 @@
     .h-line:nth-child(1) { font-size:clamp(1.7rem,5.5vw,2.5rem); letter-spacing:0.02em; }
     .h-line:nth-child(2),
     .h-line:nth-child(3) { font-size:clamp(0.9rem,2.8vw,1.15rem); color:var(--muted); }
+    .h-line:nth-child(4) { font-size:clamp(0.88rem,2.6vw,1.08rem); color:var(--gold); font-style:italic; }
 
     /* ─── S6 · CHOICE ─── */
     #s6 .q {
@@ -153,10 +151,10 @@
     .btn-time {
       background:none; border:1px solid #ccc; color:var(--muted);
       font-family:'Inter',sans-serif; font-size:0.86rem; font-weight:300;
-      padding:14px 28px; cursor:pointer;
-      transition:border-color 0.25s, color 0.25s; letter-spacing:0.02em;
+      padding:14px 28px; cursor:none;
+      letter-spacing:0.02em;
+      user-select:none; -webkit-user-select:none;
     }
-    .btn-time:hover { border-color:var(--muted); color:var(--text); }
 
     /* ─── RESPONSE : YES — full page cheesecake rain ─── */
     #resYes {
@@ -167,10 +165,7 @@
       overflow:hidden;
     }
     #resYes.on { pointer-events:all; }
-    #resYes .center-msg {
-      position:relative; z-index:2;
-      text-align:center;
-    }
+    #resYes .center-msg { position:relative; z-index:2; text-align:center; }
     #resYes .center-msg .big-cake { font-size:3.5rem; display:block; margin-bottom:14px; }
     #resYes .center-msg p {
       font-size:clamp(1.1rem,4vw,1.5rem); font-weight:300;
@@ -197,19 +192,11 @@
       opacity:0; pointer-events:none; z-index:99;
     }
     #resTime.on { pointer-events:all; }
-    .no-line {
-      font-weight:300; opacity:0; line-height:1.85;
-    }
-    .no-line:nth-child(1) {
-      font-size:clamp(0.92rem,2.8vw,1.06rem);
-      color:var(--text); margin-bottom:4px;
-    }
+    .no-line { font-weight:300; opacity:0; line-height:1.85; }
+    .no-line:nth-child(1) { font-size:clamp(0.92rem,2.8vw,1.06rem); color:var(--text); margin-bottom:4px; }
     .no-line:nth-child(2),
     .no-line:nth-child(3),
-    .no-line:nth-child(4) {
-      font-size:clamp(0.86rem,2.5vw,0.98rem);
-      color:var(--muted); max-width:420px;
-    }
+    .no-line:nth-child(4) { font-size:clamp(0.86rem,2.5vw,0.98rem); color:var(--muted); max-width:420px; }
 
     /* ─── TAP HINT ─── */
     #tapHint {
@@ -242,13 +229,13 @@
   <button class="ghost-btn" id="btn1">Continue</button>
 </section>
 
-<!-- ── Screen 2 : Photos ── -->
+<!-- ── Screen 2 : Polaroid photos ── -->
 <section class="screen" id="s2">
-  <div class="photo-row">
-    <div class="frame large">
+  <div class="polaroid-grid">
+    <div class="polaroid">
       <img src="WhatsApp Image 2026-02-23 at 12.46.30 AM (1).jpeg" alt="">
     </div>
-    <div class="frame small">
+    <div class="polaroid">
       <img src="WhatsApp Image 2026-02-23 at 12.46.30 AM (2) copy.jpeg" alt="">
     </div>
   </div>
@@ -288,6 +275,7 @@
     <p class="h-line">I like you.</p>
     <p class="h-line">I don't know if you feel the same.</p>
     <p class="h-line">I just want to know you more honestly.</p>
+    <p class="h-line">And I will be emotionally available for you.</p>
   </div>
 </section>
 
@@ -388,11 +376,14 @@
       gsap.fromTo('#s1 .ghost-btn',{ opacity:0 },       { opacity:1, duration:0.7, delay:0.65 });
     }
     if (n === 2) {
-      gsap.fromTo('#s2 .frame.large', { opacity:0, scale:0.88 }, { opacity:1, scale:1, duration:1.2, ease:'power2.out' });
-      gsap.fromTo('#s2 .frame.small', { opacity:0, scale:0.88 }, { opacity:0.85, scale:1, duration:1.2, delay:0.2, ease:'power2.out' });
+      // Polaroids drop in one by one
+      gsap.fromTo('#s2 .polaroid',
+        { opacity:0, y:30, rotation: (i) => i === 0 ? -3 : 2.2 },
+        { opacity:1, y:0,  rotation: (i) => i === 0 ? -3 : 2.2,
+          stagger:0.25, duration:0.9, ease:'power2.out' });
       gsap.fromTo('#s2 .cap',
         { opacity:0, y:10 },
-        { opacity:1, y:0, stagger:0.55, delay:1.0, duration:0.65, ease:'power2.out',
+        { opacity:1, y:0, stagger:0.55, delay:0.9, duration:0.65, ease:'power2.out',
           onComplete() { showHint(); canTap = true; } });
     }
     if (n === 3) {
@@ -415,6 +406,9 @@
           onComplete() { showHint(); canTap = true; } });
     }
     if (n === 6) {
+      // Reset dodge position when arriving at choice screen
+      gsap.set('#btnTime', { x:0, y:0 });
+      dodgeX = 0; dodgeY = 0;
       gsap.to('#s6 .q',          { opacity:1, duration:0.75, delay:0.2 });
       gsap.to('#s6 .choice-wrap',{ opacity:1, duration:0.75, delay:0.75 });
     }
@@ -437,11 +431,9 @@
     gsap.to('.dots', { opacity:0, duration:0.3 });
     gsap.to('#tapHint', { opacity:0, duration:0.3 });
 
-    // Animate center message
     gsap.fromTo('#resYes .big-cake', { opacity:0, scale:0.5 }, { opacity:1, scale:1, duration:0.7, ease:'back.out(1.5)', delay:0.3 });
     gsap.fromTo('#resYes .center-msg p', { opacity:0, y:10 }, { opacity:1, y:0, duration:0.7, delay:0.7 });
 
-    // Spawn falling cheesecakes
     const emojis = ['🍰','🍰','🍰','🎂','🍰','🍰'];
     for (let i = 0; i < 30; i++) {
       const c = document.createElement('span');
@@ -455,6 +447,36 @@
       el.appendChild(c);
     }
   });
+
+  /* ── DODGE button — runs away on hover, only moves DOWN & sideways (never toward Yes) ── */
+  let dodgeX = 0, dodgeY = 0;
+
+  function dodgeAway(cursorX, cursorY) {
+    if (cur !== 6) return;
+    const btn  = document.getElementById('btnTime');
+    const rect = btn.getBoundingClientRect();
+    const btnCX = rect.left + rect.width  / 2;
+    const btnCY = rect.top  + rect.height / 2;
+    const dx   = btnCX - cursorX;
+    const dy   = btnCY - cursorY;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    const threshold = 70;
+
+    if (dist < threshold) {
+      const push  = (threshold - dist) * 1.1;
+      const angle = Math.atan2(dy, dx);
+      dodgeX = Math.max(-130, Math.min(130, dodgeX + Math.cos(angle) * push));
+      // Only allow downward movement (positive y = down) — never float up toward Yes
+      dodgeY = Math.max(0, Math.min(100, dodgeY + Math.sin(angle) * push));
+      gsap.to(btn, { x: dodgeX, y: dodgeY, duration: 0.22, ease: 'power2.out' });
+    }
+  }
+
+  document.addEventListener('mousemove', (e) => dodgeAway(e.clientX, e.clientY));
+  document.addEventListener('touchmove', (e) => {
+    const t = e.touches[0];
+    dodgeAway(t.clientX, t.clientY);
+  }, { passive: true });
 
   /* ── NO response ── */
   document.getElementById('btnTime').addEventListener('click', () => {
